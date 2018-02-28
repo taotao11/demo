@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--MyBatis 文件头 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 获得执行的方法 -->
+<mapper namespace="com.example.demo.mapper.AdminMapper">
+<!-- 自定义返回结果 -->
+	<resultMap id="adminMap" type="AdminBean">
+		<result property="uid" column="uid" javaType="java.lang.Integer" />
+	 	<result property="uname" column="uname" javaType="java.lang.String"/>
+		<result property="upass" column="upass" javaType="java.lang.String"/>
+		<result property="usex" column="usex" javaType="java.lang.String"/>
+		<result property="uemil" column="uemil" javaType="java.lang.String"/>
+	</resultMap>
+	  <!-- id要唯一的，一般是下拉类的方法名 -->
+    <!-- 返回的是什么类型int -->
+    <select id="countUser" resultType="int">
+        select count(1) from tb_admin
+    </select>
+	 <!-- 多次插入操作 -->
+	<insert id="insertUser" parameterType="java.util.List">
+		insert into 
+		tb_admin(uid,uname,upass,usex,uemil) 
+		value
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.uid},#{item.uname},#{item.upass},#{item.usex},#{item.uemil})
+		</foreach>
+	</insert>
+
+
+	 <!-- 更新操作 -->
+	<update id="updateUser" parameterType="com.example.demo.entity.AdminBean">
+		update tb_admin set uname=#{uname},upass=#{upass},usex=#{usex},uemil=#{uemil} where uid = #{uid}
+	</update>
+	<!-- 删除操作    parameterType 接收值类型 -->
+	<delete id="deletUser" parameterType="Integer">
+		delete from tb_admin where uid=#{id} 
+	</delete>
+	
+	<!-- 查询操作 -->
+	<select id="selectUser" parameterType="String" resultMap="adminMap">
+		select * from tb_admin where uname=#{id} 
+	</select>
+		<!-- 所有查询操作 -->
+	<select id="selectAllUser" parameterType="String" resultMap="adminMap">
+	select * from tb_admin
+	</select>
+	
+</mapper>

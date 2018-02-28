@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
+</head>
+<body>
+<!--管理员列表  -->
+	<div class="container" style="max-width: 1300px">
+		<p class="page-header">你好！&nbsp;&nbsp;<span th:text="${session.admin.uname}"></span> <a style="margin-left: 170px" class="btn " href="#" th:href="@{/loginOut}">退出登录</a></p>
+		<div class="well" >
+			<table class="table table-striped text-center">
+				<tr>
+					<td>#</td>
+					<td>用户id</td>
+					<td>用户姓名</td>
+					<td>用户密码</td>
+					<td>用户性别</td>
+					<td>用户邮箱</td>
+					<td>修改操作</td>
+					<td>删除操作</td>
+				</tr>
+				<tr  th:each="collect,iterStat : ${page.items}">
+					<td th:text="${iterStat.count}">
+					</td>
+					<td th:text="${collect.uid}">
+					</td>
+					<td th:text="${collect.uname}">
+					</td>
+					<td th:text="${collect.upass}" >
+					</td>
+					<td th:text="${collect.usex}">
+					</td>
+					<td th:text="${collect.uemil}">
+					</td>
+					<td>
+						<a class="btn bg-success" th:href="@{/xiugai/{id}(id=${collect.uname})}" href="xiugai.html">修改</a>
+					</td>
+					<td>
+						<a class="btn bg-success" th:href="@{/delet/{id}(id=${collect.uid})}" href="xiugai.html">删除</a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<a th:unless="${page.currentPage == 1}" href="#" th:href="@{/selectAllAdmin/{id}(id=${page.currentPage - 1})}" class="btn">上一页</a>
+					</td>
+					<td></td>
+					<td colspan="2">
+						共<span th:text="${page.totalPage}"></span>页&nbsp;&nbsp;第<span th:text="${page.currentPage}"></span>页
+					</td>
+					<td></td>
+					<td colspan="2">
+						<a href="#" th:unless="${page.isMore == 0}" th:href="@{/selectAllAdmin/{id}(id=${page.currentPage + 1})}" class="btn">下一页</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

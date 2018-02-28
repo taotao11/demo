@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{../css/bootstrap.min.css}" href="../css/bootstrap.min.css">
+    <title>错误页面</title>
+</head>
+<body>
+    <div class="container" style="max-width: 600px;margin-top: 0px">
+        <div class="jumbotron" style="margin-top: 200px">
+            <h2>错误页面</h2>
+            <p>你访问的资源路径[<code th:text="${url}"></code>]找不到</p>
+            <p>错误信息：<code th:text="${e.message}"></code></p>
+            <p>帮助走失儿童回家！！</p>
+        </div>
+    </div>
+</body>
+</html>
