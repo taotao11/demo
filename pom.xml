@@ -58,7 +58,11 @@
 			<artifactId>pagehelper</artifactId>
 			<version>4.1.6</version>
 		</dependency>
-
+		<!--引入aop-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 		<!-- 模板 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
